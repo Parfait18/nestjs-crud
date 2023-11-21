@@ -12,10 +12,13 @@ export class UserRepository {
   }
 
   async findAll() {
-    return this.prismaService.user.findMany();
+    return this.prismaService.user.findMany({ include: { posts: {} } });
   }
   async findById(id: number) {
-    return this.prismaService.user.findUnique({ where: { id } });
+    return this.prismaService.user.findUnique({
+      where: { id },
+      include: { posts: {} },
+    });
   }
 
   async findByEmail(options: Prisma.UserWhereUniqueInput) {

@@ -28,6 +28,7 @@ async function main() {
     update: {},
     create: {
       title: 'Security in web development',
+      slug: 'security-in-web-development',
       description:
         'Ex voluptate ea ullamco sunt duis non quis reprehenderit aliquip veniam cillum nisi et. Laborum laborum nisi consectetur occaecat. Minim esse velit deserunt proident aute. Quis laborum officia pariatur ad ea dolor. Proident eiusmod mollit adipisicing dolor commodo irure adipisicing deserunt adipisicing. Ullamco ea irure laborum quis pariatur do reprehenderit nulla consequat magna duis nostrud dolor. Officia ex anim Lorem deserunt adipisicing sit enim id tempor ullamco ex qui occaecat.',
       userId: user1.id,
@@ -39,6 +40,7 @@ async function main() {
     update: {},
     create: {
       title: 'Security in mobile development',
+      slug: 'security-in-mobile-development',
       description:
         'Ex voluptate ea ullamco sunt duis non quis reprehenderit aliquip veniam cillum nisi et. Laborum laborum nisi consectetur occaecat. Minim esse velit deserunt proident aute. Quis laborum officia pariatur ad ea dolor. Proident eiusmod mollit adipisicing dolor commodo irure adipisicing deserunt adipisicing. Ullamco ea irure laborum quis pariatur do reprehenderit nulla consequat magna duis nostrud dolor. Officia ex anim Lorem deserunt adipisicing sit enim id tempor ullamco ex qui occaecat.',
       userId: user1.id,

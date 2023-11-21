@@ -6,7 +6,7 @@ import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class UserService {
-  constructor(private userRepository: UserRepository) {}
+  constructor(private readonly userRepository: UserRepository) {}
 
   create(createUserDto: CreateUserDto) {
     return this.userRepository.create({ data: createUserDto });

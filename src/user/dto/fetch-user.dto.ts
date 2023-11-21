@@ -1,5 +1,5 @@
 import {
-  IsBoolean,
+  // IsBoolean,
   IsNumber,
   IsOptional,
   IsString,
@@ -24,8 +24,8 @@ export class FecthUserDto {
   @IsString()
   lastname?: string;
 
-  @IsOptional()
-  @IsBoolean()
-  @Type(() => Boolean)
-  actif?: boolean;
+  // @IsOptional()
+  // @IsBoolean()
+  // @Type(() => Boolean)
+  // actif?: boolean;
 }
