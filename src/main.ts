@@ -7,6 +7,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('NestJs Crud app')
     .setDescription('Simple nestjs application made with nestjs')
+    .addBearerAuth()
     .setVersion('1.0')
     .build();
 
