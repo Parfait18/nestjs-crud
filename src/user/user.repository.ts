@@ -22,7 +22,7 @@ export class UserRepository {
   }
 
   async findByEmail(options: Prisma.UserWhereUniqueInput) {
-    return this.prismaService.user.findFirstOrThrow({ where: options });
+    return this.prismaService.user.findUnique({ where: options });
   }
 
   async updateUser(id: number, user: Prisma.UserUpdateInput) {

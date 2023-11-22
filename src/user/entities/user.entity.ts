@@ -1,11 +1,13 @@
-import { Post } from '@prisma/client';
+import { Role } from '@prisma/client';
 
 export class User {
   id: number;
   email: string;
   firstname: string;
   lastname: string;
-  createdAt: string;
-  updated: string;
-  posts: Post[];
+  password: string;
+  role: Role;
+  createdAt: Date;
+  // updated: string;
+  // posts: Post[];
 }
