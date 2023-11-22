@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { hash } from 'bcrypt';
 
 const prisma = new PrismaClient();
 
@@ -11,6 +12,7 @@ async function main() {
       email: 'johndoe@gmail.com',
       firstname: 'John',
       lastname: 'Doe',
+      password: await hash('password', 10),
     },
   });
   const user2 = await prisma.user.upsert({
@@ -20,6 +22,7 @@ async function main() {
       email: 'janedoe@gmail.com',
       firstname: 'Jane',
       lastname: 'Doe',
+      password: await hash('password', 10),
     },
   });
 

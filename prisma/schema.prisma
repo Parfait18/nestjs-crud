@@ -1,3 +1,4 @@
+
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
@@ -10,11 +11,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  CLIENT
+  ADMIN
+  ROOT
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   firstname String
   lastname  String
   email     String   @unique
+  password  String
+  role      Role     @default(CLIENT)
   actif     Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
