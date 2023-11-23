@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { LoginUserDto } from 'src/user/dto/login-user.dto';
 import { UserService } from 'src/user/user.service';
-import { ApiResponse, JwtPayload } from 'src/utils/common.service';
+import { ApiResponse, JwtPayload } from 'src/utils/common.types';
 
 @Injectable()
 export class AuthService {
@@ -11,8 +11,8 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly userService: UserService,
   ) {}
-  private _createToken({ email }: JwtPayload) {
-    const user: JwtPayload = { email };
+  private _createToken({ email, password }: JwtPayload) {
+    const user: JwtPayload = { email, password };
     const authorization = this.jwtService.sign(user);
 
     return {
@@ -52,12 +52,30 @@ export class AuthService {
   }
 
   async validateUser(payload: JwtPayload): Promise<any> {
-    const user = await this.userService.findOne(payload);
-
+    const user = await this.userService.findByLogin(payload);
     if (!user) {
       throw new HttpException('INVALID_TOKEN', HttpStatus.UNAUTHORIZED);
     }
-
     return user;
+  }
+
+  async verifyToken(token: string) {
+    let result: ApiResponse = {
+      success: true,
+      message: 'Token valid',
+    };
+    try {
+      const response = await this.jwtService.verify(token, {
+        secret: process.env.SECRETKEY,
+      });
+      result.data = response;
+    } catch (error) {
+      result = {
+        success: false,
+        message: `${error}`,
+      };
+    }
+
+    return result;
   }
 }

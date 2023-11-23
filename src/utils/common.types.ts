@@ -7,6 +7,7 @@ export interface ApiResponse {
   stattusCode?: HttpStatus | HttpStatus.OK;
 }
 
-export interface JwtPayload {
+export type JwtPayload = {
   email: string;
-}
+  password: string;
+};

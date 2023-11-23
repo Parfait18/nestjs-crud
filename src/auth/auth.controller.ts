@@ -1,6 +1,5 @@
 import {
   Body,
-  ClassSerializerInterceptor,
   Controller,
   Get,
   HttpException,
@@ -9,13 +8,12 @@ import {
   Put,
   Request,
   UseGuards,
-  UseInterceptors,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LoginUserDto } from 'src/user/dto/login-user.dto';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
-import { ApiResponse } from 'src/utils/common.service';
+import { ApiResponse } from 'src/utils/common.types';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { UserService } from 'src/user/user.service';
 import { UpdateUserPasswordDto } from 'src/user/dto/update-user-password.dto';
@@ -30,7 +28,6 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @ApiSecurity('access-token')
-  @UseInterceptors(ClassSerializerInterceptor)
   @ApiBearerAuth()
   @Get('me')
   async me(@Request() req) {
@@ -53,7 +50,6 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @ApiSecurity('access-token')
-  @UseInterceptors(ClassSerializerInterceptor)
   @ApiBearerAuth()
   @Put('/update/password')
   async updatePassword(
