@@ -13,8 +13,15 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { RoleGuard } from 'src/guards/roles/role.guard';
+import { Role } from '@prisma/client';
+import { Roles } from 'src/guards/roles/roles';
 
 @ApiTags('User')
+@ApiSecurity('access-token')
+@UseGuards(JwtAuthGuard, RoleGuard)
+@Roles(Role.ADMIN)
+@ApiBearerAuth()
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -23,9 +30,7 @@ export class UserController {
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
-  @UseGuards(JwtAuthGuard)
-  @ApiSecurity('access-token')
-  @ApiBearerAuth()
+
   @Get()
   findAll() {
     return this.userService.findAll();
